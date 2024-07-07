@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "refractory:aluminum_powder_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "refractory:aluminum_powder"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "item.refractory.aluminum_ingot": "Aluminum Ingot",
+  "item.refractory.aluminum_powder": "Aluminum Powder",
+  "item.refractory.raw_aluminum": "Raw Aluminum",
+  "block.refractory.aluminum_ore": "Aluminum Ore",
+  "block.refractory.deepslate_aluminum_ore": "Deepslate Aluminum Ore",
+  "block.refractory.raw_aluminum_block": "Raw Aluminum Block",
+  "block.refractory.aluminum_block": "Aluminum Block",
+  "block.refractory.aluminum_powder_block": "Aluminum Powder Block",
+  "block.refractory.refractory_bricks": "Refractory Bricks",
+  "block.refractory.refractory_controller": "Refractory Furnace Controller",
+  "itemGroup.refractory": "Refractory Mod",
+  "gui.refractory.refractory_controller": "Refractory Furnace"
+}

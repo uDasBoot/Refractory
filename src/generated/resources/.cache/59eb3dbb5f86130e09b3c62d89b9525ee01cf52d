@@ -1,0 +1,6 @@
+// 1.21	2024-06-28T01:08:24.2788393	Loot Tables
+dc4cb9a8bb1d30fc0a8b1ef64d903606d66e0fbd data/refractory/loot_table/blocks/aluminum_block.json
+70bf43b6f555087d50e9944c2b03e4fcbba6de76 data/refractory/loot_table/blocks/aluminum_ore.json
+b53d9eb5da149e12887c68ed998f30ef08cda776 data/refractory/loot_table/blocks/aluminum_powder_block.json
+c775182e1872f2e600aa342b3027dfe113f551f2 data/refractory/loot_table/blocks/deepslate_aluminum_ore.json
+71acfef5cab81e2b61ed1224d6116f826a838dde data/refractory/loot_table/blocks/raw_aluminum_block.json

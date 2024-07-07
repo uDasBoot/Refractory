@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "lit=false,variant_id=1": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_side_1"
+    },
+	"lit=true,variant_id=1": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_side_1"
+    },
+    "lit=false,variant_id=2": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_side_2"
+    },
+	"lit=true,variant_id=2": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_side_2"
+    },
+    "lit=false,variant_id=3": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_side_3"
+    },
+	"lit=true,variant_id=3": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_side_3"
+    },
+    "lit=false,variant_id=4": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_side_4"
+    },
+	"lit=true,variant_id=4": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_side_4"
+    },
+    "lit=false,variant_id=5": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_corner_1"
+    },
+	"lit=true,variant_id=5": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_corner_1"
+    },
+    "lit=false,variant_id=6": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_corner_2"
+    },
+	"lit=true,variant_id=6": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_corner_2"
+    },
+    "lit=false,variant_id=7": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_corner_3"
+    },
+	"lit=true,variant_id=7": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_corner_3"
+    },
+    "lit=false,variant_id=8": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred_corner_4"
+    },
+	"lit=true,variant_id=8": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit_corner_4"
+    },
+	"lit=false,variant_id=9": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_charred"
+    },
+	"lit=true,variant_id=9": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks_lit"
+    },
+    "lit=false,variant_id=10": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks"
+    },
+	"lit=true,variant_id=10": {
+      "model": "refractory:block/refractory_bricks/refractory_bricks"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+// 1.21	2024-06-28T01:08:24.2728054	Tags for minecraft:block mod id refractory
+96dc70b49ad4e127656fe3980f37aabd07e8e12c data/forge/tags/block/ores.json
+7bc42d58e876079372b944dc74bee57bdeac4eb1 data/minecraft/tags/block/mineable/pickaxe.json
+e135da36131f0dbe30c208448d36991f7b674033 data/minecraft/tags/block/mineable/shovel.json
+feb3587727e838695b313e09214f4fd3cc8b24e4 data/minecraft/tags/block/needs_iron_tool.json
+d6b15004a64026784ec57d1f65b9d367ce491737 data/refractory/tags/block/aluminum_blocks.json

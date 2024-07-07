@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"particle": "refractory:block/refractory_bricks/refractory_bricks_charred_side_3",
+		"up": "refractory:block/refractory_bricks/refractory_bricks_charred_side_3",
+		"down": "refractory:block/refractory_bricks/refractory_bricks_charred_side_3",
+		"north": "refractory:block/refractory_bricks/refractory_bricks",
+		"east": "refractory:block/refractory_bricks/refractory_bricks_charred",
+		"south": "refractory:block/refractory_bricks/refractory_bricks",
+		"west": "refractory:block/refractory_bricks/refractory_bricks"
+  }
+}
