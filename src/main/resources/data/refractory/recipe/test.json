@@ -1,0 +1,11 @@
+{
+  "type": "refractory:refractory_furnace_melting",
+  "group": "aluminum_ingot",
+  "ingredient": {
+    "item": "refractory:aluminum_powder"
+  },
+  "result": {
+    "FluidName": "refractory:molten_aluminum_fluid",
+    "Amount": 200
+  }
+}

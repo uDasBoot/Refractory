@@ -14,7 +14,7 @@ public class ModRecipeRegistry {
     public static final RegistryObject<RecipeSerializer<RefractoryFurnaceRecipe>> REFRACTORY_FURNACE_RECIPE =
             SERIALIZERS.register("refractory_furnace_melting", () -> RefractoryFurnaceRecipe.Serializer.INSTANCE);
 
-    public static void register(IEventBus eventBus){
+    public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
     }
 

@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class ModEntityBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = DirectionProperty.create("facing");
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
+
     protected ModEntityBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(LIT, false));

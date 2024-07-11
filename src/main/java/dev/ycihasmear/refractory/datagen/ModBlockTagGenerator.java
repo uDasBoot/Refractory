@@ -21,9 +21,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(ModTags.Blocks.ALUMINUM_BLOCKS).add(ModBlockRegistry.ALUMINUM_ORE.get()
-                ,ModBlockRegistry.DEEPSLATE_ALUMINUM_ORE.get()
-                ,ModBlockRegistry.RAW_ALUMINUM_BLOCK.get()
-                ,ModBlockRegistry.ALUMINUM_BLOCK.get());
+                , ModBlockRegistry.DEEPSLATE_ALUMINUM_ORE.get()
+                , ModBlockRegistry.RAW_ALUMINUM_BLOCK.get()
+                , ModBlockRegistry.ALUMINUM_BLOCK.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ModTags.Blocks.ALUMINUM_BLOCKS).add(ModBlockRegistry.REFRACTORY_CONTROLLER.get());
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(ModBlockRegistry.ALUMINUM_POWDER_BLOCK.get());
@@ -33,6 +33,6 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .addTag(ModTags.Blocks.ALUMINUM_BLOCKS);
 
         this.tag(Tags.Blocks.ORES).add(ModBlockRegistry.ALUMINUM_ORE.get()
-                ,ModBlockRegistry.DEEPSLATE_ALUMINUM_ORE.get());
+                , ModBlockRegistry.DEEPSLATE_ALUMINUM_ORE.get());
     }
 }

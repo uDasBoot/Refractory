@@ -16,17 +16,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         blockWithItem(ModBlockRegistry.ALUMINUM_ORE
-                ,ModBlockRegistry.DEEPSLATE_ALUMINUM_ORE
-                ,ModBlockRegistry.RAW_ALUMINUM_BLOCK
-                ,ModBlockRegistry.ALUMINUM_BLOCK
-                ,ModBlockRegistry.ALUMINUM_POWDER_BLOCK);
+                , ModBlockRegistry.DEEPSLATE_ALUMINUM_ORE
+                , ModBlockRegistry.RAW_ALUMINUM_BLOCK
+                , ModBlockRegistry.ALUMINUM_BLOCK
+                , ModBlockRegistry.ALUMINUM_POWDER_BLOCK);
 
 
     }
 
     @SafeVarargs
-    private void blockWithItem(RegistryObject<Block> ... blockRegistryObject){
-        for (RegistryObject<Block> bro:blockRegistryObject) {
+    private void blockWithItem(RegistryObject<Block>... blockRegistryObject) {
+        for (RegistryObject<Block> bro : blockRegistryObject) {
             simpleBlockWithItem(bro.get(), cubeAll(bro.get()));
         }
     }

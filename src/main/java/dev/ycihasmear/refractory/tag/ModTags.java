@@ -11,7 +11,7 @@ public class ModTags {
 
         public static final TagKey<Block> ALUMINUM_BLOCKS = tag("aluminum_blocks");
 
-        private static TagKey<Block> tag(String name){
+        private static TagKey<Block> tag(String name) {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(Refractory.MODID, name));
         }
     }

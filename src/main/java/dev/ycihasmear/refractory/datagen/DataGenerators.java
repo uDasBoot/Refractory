@@ -14,7 +14,7 @@ import java.util.concurrent.CompletableFuture;
 @Mod.EventBusSubscriber(modid = Refractory.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event){
+    public static void gatherData(GatherDataEvent event) {
         DataGenerator gen = event.getGenerator();
         PackOutput packOutput = gen.getPackOutput();
         ExistingFileHelper efh = event.getExistingFileHelper();

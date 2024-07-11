@@ -3,6 +3,7 @@ package dev.ycihasmear.refractory.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.ycihasmear.refractory.util.ModFluidUtils;
 import dev.ycihasmear.refractory.util.ModResourceLocation;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -11,13 +12,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.fluids.FluidStack;
 
 public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
     private final Ingredient ingredient;
-    private final ItemStack result;
+    private final FluidStack result;
     private final String group;
 
-    public RefractoryFurnaceRecipe(String group, Ingredient ingredient, ItemStack result) {
+    public RefractoryFurnaceRecipe(String group, Ingredient ingredient, FluidStack result) {
         this.ingredient = ingredient;
         this.result = result;
         this.group = group;
@@ -25,7 +27,7 @@ public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public boolean matches(SingleRecipeInput singleRecipeInput, Level level) {
-        if(level.isClientSide){
+        if (level.isClientSide) {
             return false;
         }
         return ingredient.test(singleRecipeInput.getItem(0));
@@ -33,7 +35,7 @@ public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public ItemStack assemble(SingleRecipeInput singleRecipeInput, HolderLookup.Provider provider) {
-        return result.copy();
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -43,6 +45,10 @@ public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider provider) {
+        return ItemStack.EMPTY;
+    }
+
+    public FluidStack getResultFluid() {
         return result.copy();
     }
 
@@ -61,7 +67,7 @@ public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
         return Type.INSTANCE;
     }
 
-    public static class Type implements RecipeType<RefractoryFurnaceRecipe>{
+    public static class Type implements RecipeType<RefractoryFurnaceRecipe> {
         public static final Type INSTANCE = new Type();
         public static final String ID = "refractory_furnace_melting";
     }
@@ -72,7 +78,7 @@ public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
         public static final MapCodec<RefractoryFurnaceRecipe> CODEC = RecordCodecBuilder.mapCodec((builder) -> builder
                 .group(Codec.STRING.optionalFieldOf("group", "").forGetter((recipe -> recipe.group)),
                         Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter((recipe) -> recipe.ingredient),
-                        ItemStack.STRICT_CODEC.fieldOf("result").forGetter((recipe) -> recipe.result))
+                        FluidStack.CODEC.fieldOf("result").forGetter((recipe) -> recipe.result))
                 .apply(builder, RefractoryFurnaceRecipe::new));
         public static final StreamCodec<RegistryFriendlyByteBuf, RefractoryFurnaceRecipe> STREAM_CODEC =
                 StreamCodec.of(RefractoryFurnaceRecipe.Serializer::toNetwork, RefractoryFurnaceRecipe.Serializer::fromNetwork);
@@ -91,14 +97,14 @@ public class RefractoryFurnaceRecipe implements Recipe<SingleRecipeInput> {
         private static RefractoryFurnaceRecipe fromNetwork(RegistryFriendlyByteBuf byteBuf) {
             String group = byteBuf.readUtf();
             Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(byteBuf);
-            ItemStack itemstack = ItemStack.STREAM_CODEC.decode(byteBuf);
-            return new RefractoryFurnaceRecipe(group, ingredient, itemstack);
+            FluidStack fluidStack = ModFluidUtils.REGISTRY_STREAM_CODEC.decode(byteBuf);
+            return new RefractoryFurnaceRecipe(group, ingredient, fluidStack);
         }
 
         private static void toNetwork(RegistryFriendlyByteBuf byteBuf, RefractoryFurnaceRecipe recipe) {
             byteBuf.writeUtf(recipe.group);
             Ingredient.CONTENTS_STREAM_CODEC.encode(byteBuf, recipe.ingredient);
-            ItemStack.STREAM_CODEC.encode(byteBuf, recipe.result);
+            ModFluidUtils.REGISTRY_STREAM_CODEC.encode(byteBuf, recipe.result);
         }
     }
 }

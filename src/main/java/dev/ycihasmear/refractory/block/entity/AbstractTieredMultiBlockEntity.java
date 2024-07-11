@@ -1,6 +1,5 @@
 package dev.ycihasmear.refractory.block.entity;
 
-import dev.ycihasmear.refractory.Refractory;
 import dev.ycihasmear.refractory.block.ModEntityBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -14,75 +13,70 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractTieredMultiBlockEntity<T extends ModEntityBlock> extends BlockEntity {
-    private Map<Integer, BlockPos> multiBlockArray = new HashMap<>();
-    private Map<Integer, Integer> variantArray = new HashMap<>();
+    private final Map<Integer, BlockPos> multiBlockArray = new HashMap<>();
+    private final Map<Integer, Integer> variantArray = new HashMap<>();
 
-    private int maxHeight;
+    private final int maxHeight;
     private int size = 0;
     private int oldSize = -1;
     private boolean isFormed = false;
 
     private int tickCounter = 0;
 
-    private BlockPos centerPos;
+    protected BlockPos centerPos;
+
     public AbstractTieredMultiBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState, int maxHeight) {
         super(pType, pPos, pBlockState);
         this.maxHeight = maxHeight;
     }
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState){
-        tickCounter++;
-        boolean flag = false;
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState) {
+        if (level == null || level.isClientSide()) return;
 
-        if (this.isFormed){
-            if (this.oldSize == -1){
-                this.oldSize = this.size;
-                flag = true;
-            }
-            if(this.oldSize != this.size){
-                this.multiBlockArray.clear();
-                this.oldSize = this.size;
-                flag = true;
-                this.setChanged();
-            }
-        }
-
-        if(tickCounter >= 20){
+        if (++tickCounter >= 20) {
             tickCounter = 0;
-            attemptToFormMultiBlock(pLevel, pPos);
-            this.setChanged();
-            Refractory.LOGGER.debug("Attempt to form");
-        }
+            boolean flag = false;
 
-        if(flag){
-            internalUpdateMultiBlockArrayBlockStates(pLevel);
+            if (isFormed) {
+                if (oldSize == -1 || oldSize != size) {
+                    oldSize = size;
+                    multiBlockArray.clear();
+                    flag = true;
+                    setChanged();
+                }
+            }
+
+            if (attemptToFormMultiBlock(pPos) || flag) {
+                updateMultiBlock();
+                setChanged(pLevel, pPos, pState);
+            }
         }
     }
 
-    protected abstract boolean  checkBottomLayer(Level level, BlockPos controllerPos);
+    protected abstract boolean checkBottomLayer(BlockPos controllerPos);
 
-    protected abstract boolean  checkControllerLayer(Level level, BlockPos controllerPos);
+    protected abstract boolean checkControllerLayer(BlockPos controllerPos);
 
-    protected abstract boolean checkLayer(Level level, BlockPos controllerPos, int layer);
+    protected abstract boolean checkLayer(BlockPos controllerPos, int layer);
 
-    public Map<Integer, BlockPos> getMultiblockArray(){
+    public Map<Integer, BlockPos> getMultiBlockArray() {
         return multiBlockArray;
     }
 
-    public Map<Integer, Integer> getVariantArray(){
+    public Map<Integer, Integer> getVariantArray() {
         return variantArray;
     }
 
-    public void putInMultiBlockArray(BlockPos pPos, int variantId){
+    public void putInMultiBlockArray(BlockPos pPos, int variantId) {
         int key = multiBlockArray.size();
         multiBlockArray.put(key, pPos);
         variantArray.put(key, variantId);
     }
 
-    public boolean attemptToFormMultiBlock(Level level, BlockPos controllerPos){
-        if(checkBottomLayer(level, controllerPos) && checkControllerLayer(level, controllerPos)){
-            this.size = setAndGetSize(level, controllerPos);
-            this.centerPos = controllerPos.relative(level.getBlockState(controllerPos).getValue(T.FACING));
+    public boolean attemptToFormMultiBlock(BlockPos controllerPos) {
+        if (checkBottomLayer(controllerPos) && checkControllerLayer(controllerPos)) {
+            size = setAndGetSize(controllerPos);
+            centerPos = controllerPos.relative(level.getBlockState(controllerPos).getValue(T.FACING));
             isFormed = true;
             return true;
         }
@@ -90,33 +84,26 @@ public abstract class AbstractTieredMultiBlockEntity<T extends ModEntityBlock> e
         return false;
     }
 
-    public int setAndGetSize(Level level, BlockPos controllerPos){
-        int size = 1;
-        for(int i = 1; i < maxHeight; i++){
-            if(checkLayer(level, controllerPos, i)){
-                size++;
-            } else {
-                break;
+    public int setAndGetSize(BlockPos controllerPos) {
+        for (int i = 1; i < maxHeight; i++) {
+            if (!checkLayer(controllerPos, i)) {
+                return i;
             }
         }
-        return size;
+        return maxHeight;
     }
 
-    public boolean isFormed(){
+    public boolean isFormed() {
         return isFormed;
     }
 
-    public int getMultiBlockSize(){
+    public int getMultiBlockSize() {
         return this.size;
     }
 
-    protected abstract boolean updateMultiBlockArrayBlockStates(Level pLevel);
+    protected abstract boolean updateMultiBlock();
 
-    private void internalUpdateMultiBlockArrayBlockStates(Level pLevel){
-        if(this.updateMultiBlockArrayBlockStates(pLevel))
-            this.setChanged();
-        Refractory.LOGGER.debug("updating block states!");
-    }
+    protected abstract void destroyMultiBlock();
 
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {

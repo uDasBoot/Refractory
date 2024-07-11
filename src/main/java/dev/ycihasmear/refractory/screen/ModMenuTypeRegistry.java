@@ -16,11 +16,11 @@ public class ModMenuTypeRegistry {
     public static final RegistryObject<MenuType<RefractoryControllerMenu>> REFRACTORY_CONTROLLER_MENU =
             registerMenuType("refractory_controller_menu", RefractoryControllerMenu::new);
 
-    private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType (String name, IContainerFactory<T> factory){
+    private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENU_TYPES.register(name, () -> IForgeMenuType.create(factory));
     }
 
-    public static void register(IEventBus eventBus){
+    public static void register(IEventBus eventBus) {
         MENU_TYPES.register(eventBus);
     }
 
